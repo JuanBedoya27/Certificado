@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado</title>
+    <link rel="stylesheet" href="Certificado.css">
+    <style>
+        .header {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .header img {
+            margin-right: 10px; /* Espacio entre las imágenes */
+        }
+
+        /* Estilos del botón de regresar */
+        .back-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Formulario para ingresar los datos del certificado -->
+    <!-- <a href="induccion.php" class="back-button">Regresar</a> -->
+    <div class="form-container">
+        <h2>Generar Certificado</h2>
+        <form id="certificate-form">
+            <label for="name">Nombre del Participante:</label>
+            <input type="text" id="name" placeholder="Ingrese el nombre completo" required>
+
+            <label for="cedula">Número de Cédula:</label>
+            <input type="text" id="cedula" placeholder="Ingrese el número de cédula" required>
+
+            <button type="button" onclick="generateCertificate()">Generar Certificado</button>
+            <button type="button" onclick="downloadCertificate()">Descargar Certificado</button>
+        </form>
+    </div>
+
+    <!-- Certificado generado -->
+    <div id="certificate" class="certificate-container" style="display: none;">
+        <header class="header">
+            <img src="https://www.elcarmendeviboral-antioquia.gov.co/sites/elcarmendeviboralantioquia/content/files/001180/58988_logo-alcaldia-el-carmen-de-viboral--300x300px2_200x200.png" alt="Logo Alcaldía">
+            <img src="Logo.png" class="logo" alt="Logo">
+        </header>
+
+        <p class="title">La Alcaldía Municipal de El Carmen de Viboral Certifica que: </p>
+
+        <h1 id="participant-name">[Nombre del participante]</h1>
+
+        <p>Identificado con C.C <span id="participant-cedula"><strong>[Número de Cédula]</strong></span></p>
+
+        <p class="course-title" id="course-name">Aprobó satisfactoriamente la Inducción en Seguridad y Salud en el Trabajo.</p>
+
+        <div class="signature">
+            <img src="../img/firma prueba.jpg" alt="Firma">
+            <p>Fecha de expedición: <span id="issue-date">[Fecha de Expedición]</span></p>
+            <p class="signed-by">Firmado por: <strong>Mary Luz Negrete</strong></p>
+            <p class="position">Cargo: <strong>Profesional Universitaria en Seguridad y Salud en el Trabajo </strong></p>
+        </div> 
+
+        <!-- Botón de Regreso -->
+
+    </div>
+
+    <script src="Certificado.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+</body>
+
+</html>
