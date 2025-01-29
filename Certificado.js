@@ -13,7 +13,12 @@ function generateCertificate() {
     // Insertar los valores en el certificado
     document.getElementById('participant-name').textContent = name;
     document.getElementById('participant-cedula').textContent = cedula;
-    document.getElementById('issue-date').textContent = currentDate.toLocaleDateString();
+
+    // Formato de la fecha (ej. "1 de febrero de 2025")
+    const formattedDate = currentDate.toLocaleDateString('es-ES', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    document.getElementById('issue-date').textContent = formattedDate;
 
     // Mostrar el certificado
     document.getElementById('certificate').style.display = 'block';
@@ -43,13 +48,13 @@ function downloadCertificate() {
     });
 }
 
-
 // Asegúrate de que el botón de descarga también funcione correctamente
 document.getElementById("certificate-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    generateCertificate();
+    event.preventDefault();  // Prevenir el envío del formulario
+    generateCertificate();  // Generar el certificado
 });
 
-document.querySelector("button[onclick='downloadCertificate()']").addEventListener("click", function() {
-    downloadCertificate();
+// Selección más robusta del botón de descarga
+document.getElementById("download-btn").addEventListener("click", function() {
+    downloadCertificate();  // Descargar el certificado como PDF
 });
