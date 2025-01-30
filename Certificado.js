@@ -23,37 +23,42 @@ function downloadCertificate() {
     const certificate = document.getElementById('certificate');
 
     // Utiliza html2canvas para capturar el certificado
-    html2canvas(certificate, { scale: window.devicePixelRatio }).then(canvas => {
+    html2canvas(certificate, { scale: 3 }).then(canvas => {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF("landscape", "mm", "a4");
-    
+
         const imgData = canvas.toDataURL("image/png");
-    
-        // Obtener dimensiones del PDF
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = pdf.internal.pageSize.getHeight();
-    
-        // Obtener dimensiones de la imagen
+
+        // Medidas de la página A4 en horizontal
+        const pdfWidth = 297;
+        const pdfHeight = 210;
+
+        // Medidas de la imagen renderizada
         const imgWidth = canvas.width;
         const imgHeight = canvas.height;
-    
-        // Calcular la escala manteniendo la proporción correcta
-        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-        const imgX = (pdfWidth - imgWidth * ratio) / 2; // Centrar horizontalmente
-        const imgY = (pdfHeight - imgHeight * ratio) / 2; // Centrar verticalmente
-    
-        pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+
+        // **Ajuste para cubrir completamente la página**
+        let widthRatio = pdfWidth / imgWidth;
+        let heightRatio = pdfHeight / imgHeight;
+        let ratio = Math.max(widthRatio, heightRatio); // Usamos la escala mayor para llenar todo
+
+        let newWidth = imgWidth * ratio;
+        let newHeight = imgHeight * ratio;
+
+        let imgX = (pdfWidth - newWidth) / 2; // Centrado
+        let imgY = (pdfHeight - newHeight) / 2; // Centrado
+
+        pdf.addImage(imgData, "PNG", imgX, imgY, newWidth, newHeight);
         pdf.save("certificado.pdf");
     });
-    
 }
 
 // Asegúrate de que el botón de descarga también funcione correctamente
-document.getElementById("certificate-form").addEventListener("submit", function(event) {
+document.getElementById("certificate-form").addEventListener("submit", function (event) {
     event.preventDefault();
     generateCertificate();
 });
 
-document.querySelector("button[onclick='downloadCertificate()']").addEventListener("click", function() {
+document.querySelector("button[onclick='downloadCertificate()']").addEventListener("click", function () {
     downloadCertificate();
 });
