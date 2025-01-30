@@ -31,18 +31,26 @@ function downloadCertificate() {
         // Convierte el canvas a imagen
         const imgData = canvas.toDataURL("image/png");
         
-        // Ajusta la imagen al tamaño de una hoja A4 en orientación horizontal
         const pdfWidth = 297;  // Ancho de A4 en mm en orientación horizontal
-        const pdfHeight = 210;
+        const pdfHeight = 210; // Alto de A4 en mm en orientación horizontal
+
+        const imgWidth = pdfWidth;
+        let imgHeight = canvas.height * pdfWidth / canvas.width;
         
-        // Agrega la imagen al PDF
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-        
-        // Descarga el PDF
+        // Si la altura de la imagen es mayor que la altura del PDF, ajustamos las proporciones
+        if (imgHeight > pdfHeight) {
+            imgHeight = pdfHeight;
+            imgWidth = canvas.width * pdfHeight / canvas.height;
+        }
+
+        // Centramos la imagen en el PDF
+        const x = (pdfWidth - imgWidth) / 2;
+        const y = (pdfHeight - imgHeight) / 2;
+
+        pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
         pdf.save("certificado.pdf");
     });
 }
-
 
 // Asegúrate de que el botón de descarga también funcione correctamente
 document.getElementById("certificate-form").addEventListener("submit", function(event) {
