@@ -21,8 +21,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 100%;
-    max-width: 350px; /* Se ajusta el tamaño máximo */
+    width: 350px;
 }
 
 .form-container h2 {
@@ -65,7 +64,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 100%;
+    width: 80%;
     max-width: 800px;
     margin-top: 20px;
     border: 5px solid #2c3e50;
@@ -80,8 +79,8 @@ body {
 }
 
 .header img {
-    width: 90px; /* Ajustado el tamaño */
-    height: 90px; /* Ajustado el tamaño */
+    width: 100px;
+    height: 100px;
     object-fit: contain;
 }
 
@@ -148,21 +147,5 @@ p {
 
     .form-container {
         width: 90%;
-    }
-
-    .form-container h2 {
-        font-size: 20px; /* Reducir tamaño de los encabezados en pantallas pequeñas */
-    }
-
-    .form-container button {
-        font-size: 14px; /* Ajustar tamaño del botón */
-    }
-
-    h1 {
-        font-size: 24px; /* Reducir tamaño de los encabezados en móviles */
-    }
-
-    p {
-        font-size: 16px; /* Reducir tamaño de los párrafos */
     }
 }
