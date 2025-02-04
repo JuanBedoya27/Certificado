@@ -24,7 +24,7 @@ function downloadCertificate() {
 
     // Utiliza html2canvas para capturar el certificado
     html2canvas(certificate, { scale: 2 }).then(canvas => {
-        // Crea un PDF usando jsPDF con orientación "landscape"
+        // Crea un PDF usando jsPDF
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF("landscape", "mm", "a4");  // Orientación horizontal (landscape)
         
@@ -33,16 +33,15 @@ function downloadCertificate() {
         
         // Ajusta la imagen al tamaño de una hoja A4 en orientación horizontal
         const pdfWidth = 297;  // Ancho de A4 en mm en orientación horizontal
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        const pdfHeight = 210;  // Alto de A4 en mm en orientación horizontal
         
-        // Agrega la imagen al PDF
+        // Agrega la imagen al PDF ocupando toda la página
         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         
         // Descarga el PDF
         pdf.save("certificado.pdf");
     });
 }
-
 
 // Asegúrate de que el botón de descarga también funcione correctamente
 document.getElementById("certificate-form").addEventListener("submit", function(event) {
