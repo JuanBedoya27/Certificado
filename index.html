@@ -48,6 +48,14 @@
             <label for="cedula">Número de Cédula:</label>
             <input type="text" id="cedula" placeholder="Ingrese el número de cédula" required>
 
+            <!-- Nuevo campo de selección para el rol -->
+            <label for="role">Rol:</label>
+            <select id="role" required>
+                <option value="Estudiante">Estudiante</option>
+                <option value="Contratista">Contratista</option>
+                <option value="Empleado">Empleado</option>
+            </select>
+
             <button type="button" onclick="generateCertificate()">Generar Certificado</button>
             <button type="button" onclick="downloadCertificate()">Descargar Certificado</button>
         </form>
@@ -64,7 +72,7 @@
 
         <h1 id="participant-name">[Nombre del participante]</h1>
 
-        <p>CONTRATISTA</p>
+        <p id="participant-role">[Rol del participante]</p> <!-- Campo para el rol -->
 
         <p>Identificado con C.C <span id="participant-cedula"><strong>[Número de Cédula]</strong></span></p>
 
@@ -75,7 +83,7 @@
             <p>Fecha de expedición: <span id="issue-date">[Fecha de Expedición]</span></p>
             <p class="signed-by">Firmado por: <strong>Mary Luz Negrete</strong></p>
             <p class="position">Cargo: <strong>Profesional Universitaria en Seguridad y Salud en el Trabajo </strong></p>
-        </div> 
+        </div>
 
         <!-- Botón de Regreso -->
 

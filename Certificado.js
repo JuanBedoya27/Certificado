@@ -2,10 +2,11 @@ function generateCertificate() {
     // Obtener valores del formulario
     const name = document.getElementById('name').value;
     const cedula = document.getElementById('cedula').value;
+    const role = document.getElementById('role').value; // Nuevo campo para el rol
     const currentDate = new Date(); // Genera la fecha automáticamente
 
     // Validar que todos los campos estén llenos
-    if (!name || !cedula) {
+    if (!name || !cedula || !role) {
         alert("Por favor, complete todos los campos.");
         return;
     }
@@ -13,6 +14,7 @@ function generateCertificate() {
     // Insertar los valores en el certificado
     document.getElementById('participant-name').textContent = name;
     document.getElementById('participant-cedula').textContent = cedula;
+    document.getElementById('participant-role').textContent = role; // Añadir rol al certificado
     document.getElementById('issue-date').textContent = currentDate.toLocaleDateString();
 
     // Mostrar el certificado
