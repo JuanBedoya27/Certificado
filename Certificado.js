@@ -1,8 +1,8 @@
-function generateCertificate() {
+unction generateCertificate() {
     // Obtener valores del formulario
     const name = document.getElementById('name').value;
     const cedula = document.getElementById('cedula').value;
-    const role = document.getElementById('role').value; // Campo para el rol
+    const role = document.getElementById('role').value; // Nuevo campo para el rol
     const currentDate = new Date(); // Genera la fecha automáticamente
 
     // Validar que todos los campos estén llenos
@@ -24,41 +24,33 @@ function generateCertificate() {
 function downloadCertificate() {
     const certificate = document.getElementById('certificate');
 
-    // Utiliza html2canvas para capturar el certificado con mayor resolución (scale:2)
+    // Utiliza html2canvas para capturar el certificado
     html2canvas(certificate, { scale: 2 }).then(canvas => {
-        // Crea un PDF usando jsPDF en orientación horizontal (landscape)
+        // Crea un PDF usando jsPDF
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF("landscape", "mm", "a4");
+        const pdf = new jsPDF("landscape", "mm", "a4");  // Orientación horizontal (landscape)
         
         // Convierte el canvas a imagen
         const imgData = canvas.toDataURL("image/png");
         
-        // Dimensiones para una hoja A4 en orientación horizontal
-        const pdfWidth = 297;  // Ancho A4 en mm
-        const pdfHeight = 210; // Alto A4 en mm
+        // Ajusta la imagen al tamaño de una hoja A4 en orientación horizontal
+        const pdfWidth = 297;  // Ancho de A4 en mm en orientación horizontal
+        const pdfHeight = 210;  // Alto de A4 en mm en orientación horizontal
         
         // Agrega la imagen al PDF ocupando toda la página
         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         
         // Descarga el PDF
         pdf.save("certificado.pdf");
-
-        // Recargar la página después de 2 segundos para permitir la descarga
-        setTimeout(() => {
-            window.location.reload();
-        }, 2000);
     });
 }
 
-// Manejadores de eventos
-
-// Evita el envío por defecto del formulario y genera el certificado
+// Asegúrate de que el botón de descarga también funcione correctamente
 document.getElementById("certificate-form").addEventListener("submit", function(event) {
     event.preventDefault();
     generateCertificate();
 });
 
-// Agrega el evento al botón de descarga para generar y descargar el PDF
 document.querySelector("button[onclick='downloadCertificate()']").addEventListener("click", function() {
     downloadCertificate();
-});
+});  
