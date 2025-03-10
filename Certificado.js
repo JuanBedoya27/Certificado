@@ -1,4 +1,4 @@
-unction generateCertificate() {
+function generateCertificate() {
     // Obtener valores del formulario
     const name = document.getElementById('name').value;
     const cedula = document.getElementById('cedula').value;
