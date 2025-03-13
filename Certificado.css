@@ -1,6 +1,11 @@
 /* Importar fuentes desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
 
+/* Box-sizing global para un manejo consistente de padding y border */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* General */
 body {
     font-family: 'Open Sans', sans-serif; /* Usamos Open Sans para el cuerpo */
@@ -104,7 +109,7 @@ p {
     font-size: 18px;
     color: #555;
     margin: 5px 0;
-    font-family: 'Open Sans', sans-serif; /* Usamos Open Sans para el texto del cuerpo */
+    font-family: 'Open Sans', sans-serif; /* Texto del cuerpo en Open Sans */
 }
 
 .course-title {
@@ -130,7 +135,7 @@ p {
     font-size: 16px;
     color: #333;
     font-weight: bold;
-    font-family: 'Open Sans', sans-serif; /* Usamos Open Sans para la firma */
+    font-family: 'Open Sans', sans-serif; /* Firma en Open Sans */
 }
 
 /* Responsividad */
@@ -143,9 +148,31 @@ p {
     .header img {
         width: 80px;
         height: 80px;
+        
     }
 
     .form-container {
         width: 90%;
     }
 }
+
+@media print {
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .certificate-container {
+      /* Ajusta para que ocupe el 100% de la página impresa y elimina efectos que puedan recortarse */
+      width: 100%;
+      max-width: none;
+      border: none;
+      box-shadow: none;
+    }
+    
+    /* Oculta elementos que no deseas imprimir, como botones o formularios */
+    .form-container, button {
+      display: none;
+    }
+  }
+  
